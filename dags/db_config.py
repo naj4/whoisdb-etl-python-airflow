@@ -1,9 +1,9 @@
 from configparser import ConfigParser
 
-def get_db_info(filename,section):
+def get_db_info(filepath,section):
     # instantiating the parser object
     parser=ConfigParser()
-    parser.read(filename)
+    parser.read(filepath)
 
     db_info={}
     if parser.has_section(section):

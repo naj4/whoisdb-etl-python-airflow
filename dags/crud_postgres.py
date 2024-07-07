@@ -4,10 +4,12 @@ import glob
 import pandas as pd
 import os
 import numpy as np
+from constants import DESTINATION_DIR
 
 filename='db_info.ini'
 section='postgres-whois-db'
-db_info = get_db_info(filename,section)
+config_path = os.path.join('config', filename) 
+db_info = get_db_info(config_path,section)
 
 # SQL queries
 create_sourceconfig_table_query = """
@@ -172,7 +174,8 @@ def db_setup():
             connection.close()
             print("Database connection closed.")
 
-def load_files_to_db(directory):
+def load_files_to_db():
+    directory = DESTINATION_DIR
     connection = None
     # Establish connection to the database
     try:

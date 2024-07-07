@@ -1,9 +1,11 @@
 import gzip
 import os
 import shutil
+from constants import DESTINATION_DIR
 
 # Unzip all .gz files in specifird directory
-def unzip_gz_files(directory):
+def unzip_gz_files():
+    directory = DESTINATION_DIR
     for filename in os.listdir(directory):
         if filename.endswith('.gz'):
             file_path = os.path.join(directory, filename)

@@ -1,15 +1,12 @@
 from extract import download_files
-from unzip import unzip_gz_files
 from crud_postgres import db_setup, load_files_to_db
+from constants import URL, USERNAME, PASSWORD, DESTINATION_DIR
 
-# Constants
-URL = 'https://domainwhoisdatabase.com/whois_database/sample/gtlds/v47/sample/simple/'
-USERNAME = 'sample'
-PASSWORD = 'sample999!'
-DESTINATION_DIR = r'C:\WhoIsDbIntegration\Destination'
-
-def run_whois_etl():
+def extract_files():
     filenames = db_setup()
-    download_files(URL, USERNAME, PASSWORD, filenames, DESTINATION_DIR)
-    unzip_gz_files(DESTINATION_DIR)
-    load_files_to_db(DESTINATION_DIR)
+    if filenames:  # Check if filenames is not empty
+        download_files(URL, USERNAME, PASSWORD, filenames, DESTINATION_DIR)
+    else:
+        print("No files to download.")
+    # unzip_gz_files()
+    # load_files_to_db()
